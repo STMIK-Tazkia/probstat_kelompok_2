@@ -94,34 +94,24 @@ csv_data = """No,Usia,Jenis_Kelamin,Merokok,Bekerja,Rumah_Tangga,Aktivitas_Begad
 data = pd.read_csv(StringIO(csv_data))
 data = data.head(60)
 
-# Drop the 'No' column as it is an identifier and not a feature
 data = data.drop('No', axis=1)
 
-# Identifikasi fitur kategorikal (semua kolom kecuali 'Hasil')
 categorical_features = data.columns.drop('Hasil')
 
-# Inisialisasi OrdinalEncoder untuk mengubah fitur kategorikal menjadi numerik
 encoder = OrdinalEncoder()
 
-# Terapkan OrdinalEncoder ke fitur kategorikal
 data[categorical_features] = encoder.fit_transform(data[categorical_features])
 
-# Pisahkan fitur (X) dan variabel target (y)
 X = data[categorical_features]
 y = data['Hasil']
-
-# Bagi data menjadi set pelatihan (training) dan pengujian (testing)
-# Dengan 60 baris data, set pengujian akan memiliki 12 baris (60 * 0.2).
+.
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Inisialisasi dan latih model Categorical Naive Bayes
 model = CategoricalNB(alpha=1.0)
 model.fit(X_train, y_train)
 
-# Lakukan prediksi pada set pengujian
 y_pred = model.predict(X_test)
 
-# Evaluasi model
 accuracy = accuracy_score(y_test, y_pred)
 report = classification_report(y_test, y_pred, zero_division=0)
 cm = confusion_matrix(y_test, y_pred)
@@ -133,4 +123,5 @@ print(f"\nAkurasi Model Naive Bayes (data terbatas 60 baris): {accuracy:.2f}")
 print("\nLaporan Klasifikasi:")
 print(report)
 print("\nMatriks Konfusi:")
+
 print(cm)
