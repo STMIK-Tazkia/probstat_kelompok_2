@@ -119,9 +119,10 @@ cm = confusion_matrix(y_test, y_pred)
 print(f"Jumlah baris data yang digunakan: {len(data)}")
 print(f"Ukuran data latih: {len(X_train)} baris")
 print(f"Ukuran data uji: {len(X_test)} baris")
-print(f"\nAkurasi Model Naive Bayes (data terbatas 60 baris): {accuracy:.2f}")
+print(f"\nAkurasi Model Naive Bayes : {accuracy:.2f}")
 print("\nLaporan Klasifikasi:")
 print(report)
 print("\nMatriks Konfusi:")
 
 print(cm)
+
